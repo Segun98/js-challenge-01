@@ -90,10 +90,59 @@ function formatDate() {
 NUMBER FIVE
 */
 
-// Favour is a smart and knowledge savvy dude. He overheard some people talking about
-// an algorithm used to validate a variety of identification numbers, such as credit card
-// numbers, IMEI numbers, Canadian Social Insurance Numbers. They called it Luhn's algorithm. He did a quick search online and saw the steps to implementing the algorithm on
-// wikipedia. He started coding it out but he got frustrated at some point then he came to you
-// for help. At that point, you saw that he missed out some things logic-wise and you would just
-// code it out from scratch showing him some concepts and learning along the way too. Kindly
-// send a solution to your own version of the solution to the problem.
+const luhnCheck = num => {
+    let arr = (num + '')
+        .split('')
+        .reverse()
+        .map(x => parseInt(x));
+    let lastDigit = arr.splice(0, 1)[0];
+    let sum = arr.reduce((acc, val, i) => (i % 2 !== 0 ? acc + val : acc + ((val * 2) % 9) || 9), 0);
+    sum += lastDigit;
+    return sum % 10 === 0;
+};
+// console.log(luhnCheck('4485275742308327'));
+// console.log(luhnCheck(6011329933655299));
+// console.log(luhnCheck(123456789));
+
+/*
+NUMBER SIX
+*/
+// Binary Search
+
+function binary_Search(items, value) {
+    var firstIndex = 0,
+        lastIndex = items.length - 1,
+        middleIndex = Math.floor((lastIndex + firstIndex) / 2);
+
+    while (items[middleIndex] != value && firstIndex < lastIndex) {
+        if (value < items[middleIndex]) {
+            lastIndex = middleIndex - 1;
+        } else if (value > items[middleIndex]) {
+            firstIndex = middleIndex + 1;
+        }
+        middleIndex = Math.floor((lastIndex + firstIndex) / 2);
+    }
+
+    return (items[middleIndex] != value) ? -1 : middleIndex;
+}
+var items = [1, 2, 3, 4, 5, 7, 8, 9];
+// console.log(binary_Search(items, 1));   
+// console.log(binary_Search(items, 5));
+
+
+// Fibonnaci 
+const fibonacci = n =>
+    Array.from({
+        length: n
+    }).reduce(
+        (acc, val, i) => acc.concat(i > 1 ? acc[i - 1] + acc[i - 2] : i),
+        []
+    );
+// console.log(fibonacci(2)); 
+// console.log(fibonacci(3)); 
+// console.log(fibonacci(6));
+
+
+/*
+NUMBER SEVEN
+*/
